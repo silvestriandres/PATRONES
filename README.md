@@ -1,350 +1,262 @@
-# 🧠 Fundamentos de Diseño de Software en .NET
+# 🧠 PATRONES — Diseño y Arquitectura de Software en .NET
 
-Este repositorio reúne una colección de ejemplos prácticos enfocados en **principios fundamentales de diseño de software**, aplicados en .NET.
+Este repositorio es una colección de ejemplos prácticos de **patrones de diseño y arquitectura**, implementados en .NET, con un enfoque claro en **entender problemas reales y sus soluciones**.
 
-A diferencia de repositorios centrados únicamente en patrones de diseño, este proyecto pone el foco en **los conceptos que guían las decisiones de diseño**, como principios, buenas prácticas y fundamentos teóricos llevados a código real.
+No se trata solo de implementar patrones, sino de comprender:
+
+* **Cuándo usarlos**
+* **Qué problema resuelven**
+* **Qué pasa si no los usamos**
+* **Cómo impactan en la calidad del software**
 
 ---
 
 ## 🎯 Objetivo
 
-El objetivo de este proyecto es:
+Este proyecto tiene como objetivo principal construir **criterio de diseño de software**, más allá de la teoría.
 
-* Entender **por qué** surgen los patrones de diseño
-* Aplicar principios como **SOLID**, **GRASP**, **KISS** y **YAGNI**
+Busca:
+
+* Comprender los patrones desde un enfoque práctico
 * Analizar problemas reales de diseño
 * Comparar implementaciones incorrectas vs correctas
-* Construir criterio de ingeniería, no solo conocimiento teórico
+* Aplicar buenas prácticas de ingeniería
+* Generar ejemplos reutilizables y didácticos
 
 ---
 
-## 🧱 Estructura del Proyecto
+## 🧭 Enfoque
 
-El repositorio está organizado por conceptos clave de diseño:
+Cada patrón en este repositorio está pensado como un **ejercicio aislado**, generalmente implementado como una **Console App**, para:
 
+* Reducir ruido (sin frameworks innecesarios)
+* Enfocar en el problema y la solución
+* Facilitar la comprensión
+
+---
+
+## 🧱 Estructura del Repositorio
+
+El proyecto está organizado por **categorías clásicas de patrones**, siguiendo una clasificación ampliamente utilizada:
+
+```id="0c8o8o"
+/src/
+ ├── Creational/
+ ├── Structural/
+ ├── Behavioral/
+ └── Architectural/
 ```
-/COMPOSICIÓN-HERENCIA
-/GRASP
-/INVERSIÓN-DEPENDENCIAS
-/SOLID
-/YAGNI-KISS
+
+---
+
+### 🏭 Creational
+
+Patrones enfocados en la **creación de objetos**.
+
+```id="m2rqws"
+/src/Creational/
+ ├── Factory/
+ ├── AbstractFactory/
+ ├── Builder/
+ └── Singleton/
 ```
 
-Cada carpeta contiene ejemplos prácticos y casos de uso enfocados en ese principio o conjunto de principios.
+**Problemas que resuelven:**
+
+* Creación compleja de objetos
+* Dependencias rígidas
+* Falta de flexibilidad al instanciar clases
 
 ---
 
-## 📚 Contenido
+### 🧱 Structural
 
-### 🧩 COMPOSICIÓN vs HERENCIA
+Patrones enfocados en la **composición y estructura del sistema**.
 
-Explora cuándo usar composición en lugar de herencia.
+```id="v57z0x"
+/src/Structural/
+ ├── Decorator/
+ ├── Adapter/
+ ├── Facade/
+ └── Composite/
+```
 
-**Conceptos clave:**
+**Problemas que resuelven:**
 
-* "Favor composition over inheritance"
-* Reutilización de comportamiento
-* Bajo acoplamiento
-
-**Problema típico:**
-Jerarquías rígidas difíciles de extender y mantener.
-
----
-
-### 🧠 GRASP (General Responsibility Assignment Software Patterns)
-
-Conjunto de principios para asignar responsabilidades correctamente.
-
-**Incluye:**
-
-* Information Expert
-* Creator
-* Controller
-* Low Coupling
-* High Cohesion
-
-**Objetivo:**
-Diseñar clases con responsabilidades claras y bien distribuidas.
+* Acoplamiento entre componentes
+* Rigidez en la estructura del sistema
+* Dificultad para extender comportamiento
 
 ---
 
-### 🔌 INVERSIÓN DE DEPENDENCIAS
+### 🔁 Behavioral
 
-Aplicación del principio Dependency Inversion Principle (DIP).
+Patrones enfocados en el **comportamiento e interacción entre objetos**.
 
-**Conceptos clave:**
+```id="fh43y7"
+/src/Behavioral/
+ ├── Strategy/
+ ├── Mediator/
+ ├── Observer/
+ └── Command/
+```
 
-* Dependencia de abstracciones en lugar de implementaciones
-* Inversión de control
-* Desacoplamiento entre capas
+**Problemas que resuelven:**
 
-**Problema típico:**
-Clases fuertemente acopladas a implementaciones concretas, difíciles de testear y extender.
-
----
-
-### 🧱 SOLID
-
-Implementación de los 5 principios SOLID:
-
-* S — Single Responsibility Principle (SRP)
-* O — Open/Closed Principle (OCP)
-* L — Liskov Substitution Principle (LSP)
-* I — Interface Segregation Principle (ISP)
-* D — Dependency Inversion Principle (DIP)
-
-**Objetivo:**
-Construir software mantenible, extensible y testeable.
+* Lógica condicional compleja
+* Alto acoplamiento entre clases
+* Dificultad para cambiar comportamientos
 
 ---
 
-### ⚖️ YAGNI & KISS
+### 🏗️ Architectural
 
-Principios de simplicidad en el diseño.
+Patrones a nivel de **arquitectura de sistema**.
 
-* **YAGNI (You Aren’t Gonna Need It):** evitar implementar funcionalidad innecesaria
-* **KISS (Keep It Simple, Stupid):** mantener el diseño simple y claro
+```id="v8g6lw"
+/src/Architectural/
+ ├── Layered/
+ ├── CleanArchitecture/
+ ├── CQRS/
+ └── EventDriven/
+```
 
-**Problema típico:**
-Sobreingeniería, complejidad innecesaria y código difícil de mantener.
+**Problemas que resuelven:**
 
----
-
-## 🧪 Enfoque de los Ejemplos
-
-Cada módulo sigue una estructura didáctica:
-
-1. **Problema**
-2. **Implementación inicial (naive / incorrecta)**
-3. **Problemas de esa implementación**
-4. **Refactor aplicando el principio**
-5. **Resultado y beneficios**
-
-Este enfoque permite entender no solo *qué hacer*, sino también *qué evitar*.
+* Escalabilidad
+* Separación de responsabilidades
+* Mantenibilidad en sistemas grandes
 
 ---
 
-## 🔗 Relación con Patrones de Diseño
+## 🧪 Estructura de cada patrón
 
-Este repositorio complementa el estudio de patrones de diseño.
+Cada patrón sigue una estructura consistente para facilitar el aprendizaje:
 
-* Los **principios** explican el **por qué**
-* Los **patrones** explican el **cómo**
-
-Ejemplo:
-
-* SOLID → base conceptual
-* Strategy Pattern → implementación concreta basada en Open/Closed
+```id="t9d9vn"
+PatternName/
+ ├── PatternName.Console/
+ └── README.md
+```
 
 ---
 
-## 🧠 Filosofía del Proyecto
+### 📁 Dentro de cada proyecto
 
-Este repo está pensado como:
+```id="a9a6u7"
+PatternName.Console/
+ ├── Program.cs
+ ├── BadExample/
+ ├── GoodExample/
+ ├── Domain/
+ ├── Implementations/
+ └── Context/ (si aplica)
+```
 
-* 📘 Material de estudio progresivo
-* 🧪 Laboratorio de experimentación
-* 🧱 Base para construir criterio de diseño
+---
 
-No busca ser un framework ni una librería productiva, sino una herramienta para aprender a diseñar mejor software.
+## 🧠 Metodología de aprendizaje
+
+Cada ejemplo está diseñado siguiendo este flujo:
+
+### 1. Problema
+
+Situación real donde aparece una limitación de diseño.
+
+### 2. Implementación incorrecta (Bad Example)
+
+Código típico con problemas como:
+
+* Alto acoplamiento
+* Violación de principios SOLID
+* Dificultad de extensión
+
+### 3. Problemas detectados
+
+Análisis de por qué esa solución no escala.
+
+### 4. Refactor con patrón (Good Example)
+
+Aplicación del patrón correspondiente.
+
+### 5. Resultado
+
+Comparación clara entre ambas soluciones.
+
+---
+
+## 🔗 Relación con principios de diseño
+
+Este repositorio se apoya fuertemente en principios como:
+
+* SOLID
+* GRASP
+* KISS
+* YAGNI
+
+Los patrones no existen en el vacío:
+son **respuestas concretas a problemas que estos principios ayudan a identificar**.
+
+---
+
+## ⚠️ Filosofía importante
+
+> No todos los problemas necesitan un patrón.
+
+Este repositorio promueve:
+
+✔ Uso consciente de patrones
+✔ Evitar sobreingeniería
+✔ Priorizar simplicidad cuando sea posible
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+* .NET (C#)
+* Console Applications (principalmente)
+* Estructuras simples, sin frameworks innecesarios
 
 ---
 
 ## 🚀 Cómo usar este repositorio
 
-1. Explorar cada carpeta por separado
-2. Leer el contexto del problema
-3. Ejecutar los ejemplos
-4. Comparar implementaciones
-5. Intentar extender o refactorizar el código
+1. Navegar por categoría (Creational, Structural, etc.)
+2. Elegir un patrón
+3. Leer el README del patrón
+4. Ejecutar el proyecto de consola
+5. Analizar diferencias entre Bad vs Good
+6. Extender el ejemplo por cuenta propia
 
 ---
 
-## 📌 Próximos pasos
+## 📈 Evolución del proyecto
 
-Este proyecto puede evolucionar hacia:
+Este repositorio puede crecer hacia:
 
-* Integración con patrones de diseño clásicos
-* Ejemplos combinando múltiples principios
-* Casos más cercanos a aplicaciones reales (.NET APIs, servicios, etc.)
-
----
-
-## 👨‍💻 Autor
-
-Proyecto orientado al aprendizaje y profundización en diseño de software en .NET, con enfoque práctico y profesional.
-# 🧠 Fundamentos de Diseño de Software en .NET
-
-Este repositorio reúne una colección de ejemplos prácticos enfocados en **principios fundamentales de diseño de software**, aplicados en .NET.
-
-A diferencia de repositorios centrados únicamente en patrones de diseño, este proyecto pone el foco en **los conceptos que guían las decisiones de diseño**, como principios, buenas prácticas y fundamentos teóricos llevados a código real.
+* Integración de múltiples patrones en un mismo ejemplo
+* Versiones con ASP.NET Core
+* Casos más cercanos a entornos productivos
+* Testing unitario aplicado a cada patrón
 
 ---
 
-## 🎯 Objetivo
+## 👨‍💻 Enfoque profesional
 
-El objetivo de este proyecto es:
+Este proyecto está diseñado como:
 
-* Entender **por qué** surgen los patrones de diseño
-* Aplicar principios como **SOLID**, **GRASP**, **KISS** y **YAGNI**
-* Analizar problemas reales de diseño
-* Comparar implementaciones incorrectas vs correctas
-* Construir criterio de ingeniería, no solo conocimiento teórico
+* 📘 Material de estudio estructurado
+* 🧪 Laboratorio práctico
+* 🧠 Entrenamiento de pensamiento arquitectónico
 
 ---
 
-## 🧱 Estructura del Proyecto
+## 📌 Nota final
 
-El repositorio está organizado por conceptos clave de diseño:
-
-```
-/COMPOSICIÓN-HERENCIA
-/GRASP
-/INVERSIÓN-DEPENDENCIAS
-/SOLID
-/YAGNI-KISS
-```
-
-Cada carpeta contiene ejemplos prácticos y casos de uso enfocados en ese principio o conjunto de principios.
-
----
-
-## 📚 Contenido
-
-### 🧩 COMPOSICIÓN vs HERENCIA
-
-Explora cuándo usar composición en lugar de herencia.
-
-**Conceptos clave:**
-
-* "Favor composition over inheritance"
-* Reutilización de comportamiento
-* Bajo acoplamiento
-
-**Problema típico:**
-Jerarquías rígidas difíciles de extender y mantener.
-
----
-
-### 🧠 GRASP (General Responsibility Assignment Software Patterns)
-
-Conjunto de principios para asignar responsabilidades correctamente.
-
-**Incluye:**
-
-* Information Expert
-* Creator
-* Controller
-* Low Coupling
-* High Cohesion
-
-**Objetivo:**
-Diseñar clases con responsabilidades claras y bien distribuidas.
-
----
-
-### 🔌 INVERSIÓN DE DEPENDENCIAS
-
-Aplicación del principio Dependency Inversion Principle (DIP).
-
-**Conceptos clave:**
-
-* Dependencia de abstracciones en lugar de implementaciones
-* Inversión de control
-* Desacoplamiento entre capas
-
-**Problema típico:**
-Clases fuertemente acopladas a implementaciones concretas, difíciles de testear y extender.
-
----
-
-### 🧱 SOLID
-
-Implementación de los 5 principios SOLID:
-
-* S — Single Responsibility Principle (SRP)
-* O — Open/Closed Principle (OCP)
-* L — Liskov Substitution Principle (LSP)
-* I — Interface Segregation Principle (ISP)
-* D — Dependency Inversion Principle (DIP)
-
-**Objetivo:**
-Construir software mantenible, extensible y testeable.
-
----
-
-### ⚖️ YAGNI & KISS
-
-Principios de simplicidad en el diseño.
-
-* **YAGNI (You Aren’t Gonna Need It):** evitar implementar funcionalidad innecesaria
-* **KISS (Keep It Simple, Stupid):** mantener el diseño simple y claro
-
-**Problema típico:**
-Sobreingeniería, complejidad innecesaria y código difícil de mantener.
-
----
-
-## 🧪 Enfoque de los Ejemplos
-
-Cada módulo sigue una estructura didáctica:
-
-1. **Problema**
-2. **Implementación inicial (naive / incorrecta)**
-3. **Problemas de esa implementación**
-4. **Refactor aplicando el principio**
-5. **Resultado y beneficios**
-
-Este enfoque permite entender no solo *qué hacer*, sino también *qué evitar*.
-
----
-
-## 🔗 Relación con Patrones de Diseño
-
-Este repositorio complementa el estudio de patrones de diseño.
-
-* Los **principios** explican el **por qué**
-* Los **patrones** explican el **cómo**
-
-Ejemplo:
-
-* SOLID → base conceptual
-* Strategy Pattern → implementación concreta basada en Open/Closed
-
----
-
-## 🧠 Filosofía del Proyecto
-
-Este repo está pensado como:
-
-* 📘 Material de estudio progresivo
-* 🧪 Laboratorio de experimentación
-* 🧱 Base para construir criterio de diseño
-
-No busca ser un framework ni una librería productiva, sino una herramienta para aprender a diseñar mejor software.
-
----
-
-## 🚀 Cómo usar este repositorio
-
-1. Explorar cada carpeta por separado
-2. Leer el contexto del problema
-3. Ejecutar los ejemplos
-4. Comparar implementaciones
-5. Intentar extender o refactorizar el código
-
----
-
-## 📌 Próximos pasos
-
-Este proyecto puede evolucionar hacia:
-
-* Integración con patrones de diseño clásicos
-* Ejemplos combinando múltiples principios
-* Casos más cercanos a aplicaciones reales (.NET APIs, servicios, etc.)
+El objetivo no es memorizar patrones, sino **desarrollar criterio para diseñar software mantenible, escalable y limpio**.
 
 ---
 
 ## 👨‍💻 Autor
 
-Proyecto orientado al aprendizaje y profundización en diseño de software en .NET, con enfoque práctico y profesional.
+Repositorio orientado al aprendizaje profundo de diseño de software en .NET, con enfoque práctico y profesional.
