@@ -1,3 +1,4 @@
+using StrategyPattern.ConsoleProject.Domain.Enums;
 using StrategyPattern.ConsoleProject.Domain.Interfaces;
 using StrategyPattern.ConsoleProject.Strategies;
 using System;
@@ -6,14 +7,14 @@ namespace StrategyPattern.ConsoleProject.Helpers;
 
 public static class PaymentStrategySelector
 {
-    public static IPaymentStrategy GetStrategy(string method)
+    public static IPaymentStrategy GetStrategy(PaymentMethod method)
     {
-        return method.ToLower() switch
+        return method switch
         {
-            "creditcard" => new CreditCardPaymentStrategy(),
-            "paypal" => new PayPalPaymentStrategy(),
-            "crypto" => new CryptoPaymentStrategy(),
-            _ => throw new ArgumentException("Invalid payment method")
+            PaymentMethod.CreditCard => new CreditCardPaymentStrategy(),
+            PaymentMethod.PayPal => new PayPalPaymentStrategy(),
+            PaymentMethod.Crypto => new CryptoPaymentStrategy(),
+            _ => throw new ArgumentOutOfRangeException(nameof(method), "Invalid payment method")
         };
     }
 }
