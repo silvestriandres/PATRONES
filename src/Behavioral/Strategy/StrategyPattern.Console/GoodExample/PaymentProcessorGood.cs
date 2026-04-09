@@ -1,5 +1,6 @@
 using StrategyPattern.ConsoleProject.Context;
-using StrategyPattern.ConsoleProject.Strategies;
+using StrategyPattern.ConsoleProject.Helpers;
+using System;
 
 namespace StrategyPattern.ConsoleProject.GoodExample;
 
@@ -7,13 +8,19 @@ public class PaymentProcessorGood
 {
     public void Run()
     {
-        var context = new PaymentContext(new CreditCardPaymentStrategy());
-        context.ExecutePayment(100);
+        Console.WriteLine("Enter payment method (CreditCard, PayPal, Crypto):");
+        var method = Console.ReadLine();
 
-        context.SetStrategy(new PayPalPaymentStrategy());
-        context.ExecutePayment(200);
+        try
+        {
+            var strategy = PaymentStrategySelector.GetStrategy(method!);
 
-        context.SetStrategy(new CryptoPaymentStrategy());
-        context.ExecutePayment(300);
+            var context = new PaymentContext(strategy);
+            context.ExecutePayment(150);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

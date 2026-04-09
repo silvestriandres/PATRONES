@@ -7,7 +7,7 @@ var bad = new PaymentProcessorBad();
 bad.Process("CreditCard", 100);
 bad.Process("PayPal", 200);
 
-Console.WriteLine("\n=== GOOD EXAMPLE ===");
+Console.WriteLine("\n=== GOOD EXAMPLE (DYNAMIC) ===");
 
 var good = new PaymentProcessorGood();
 good.Run();
