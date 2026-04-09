@@ -1,4 +1,5 @@
 using StrategyPattern.ConsoleProject.Context;
+using StrategyPattern.ConsoleProject.Domain.Enums;
 using StrategyPattern.ConsoleProject.Helpers;
 using System;
 
@@ -8,19 +9,24 @@ public class PaymentProcessorGood
 {
     public void Run()
     {
-        Console.WriteLine("Enter payment method (CreditCard, PayPal, Crypto):");
-        var method = Console.ReadLine();
+        Console.WriteLine("""
+        Select payment method:
+        - CreditCard
+        - PayPal
+        - Crypto
+        """);
 
-        try
-        {
-            var strategy = PaymentStrategySelector.GetStrategy(method!);
+        var input = Console.ReadLine();
 
-            var context = new PaymentContext(strategy);
-            context.ExecutePayment(150);
-        }
-        catch (Exception ex)
+        if (!Enum.TryParse<PaymentMethod>(input, true, out var method))
         {
-            Console.WriteLine(ex.Message);
+            Console.WriteLine("Invalid payment method");
+            return;
         }
+
+        var strategy = PaymentStrategySelector.GetStrategy(method);
+
+        var context = new PaymentContext(strategy);
+        context.ExecutePayment(150);
     }
 }
