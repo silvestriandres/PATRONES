@@ -2,19 +2,25 @@
 
 El **Strategy Pattern** es un patrón de comportamiento que permite definir una familia de algoritmos, encapsular cada uno de ellos y hacerlos intercambiables en tiempo de ejecución.
 
-Este patrón es especialmente útil cuando un sistema necesita soportar múltiples variantes de una misma operación sin recurrir a estructuras condicionales complejas.
+Permite cambiar el comportamiento de un objeto sin modificar su código.
 
 ---
 
 ## 🎯 Problema
 
-Supongamos un sistema de pagos que soporta distintos métodos:
+En muchos sistemas existe una misma operación con múltiples variantes.
+
+En este caso, un sistema de pagos que soporta:
 
 * Tarjeta de crédito
 * PayPal
 * Criptomonedas
 
-Una implementación inicial suele verse así:
+Una implementación inicial suele resolverse con condicionales.
+
+---
+
+## ❌ Implementación inicial (Bad Example)
 
 ```csharp
 if (method == "CreditCard") { ... }
@@ -26,43 +32,23 @@ else if (method == "Crypto") { ... }
 
 ## ❌ Problemas de esta aproximación
 
-### 🔴 1. Violación de Open/Closed Principle (OCP)
-
-Cada nuevo método de pago obliga a modificar la clase existente.
-
----
-
-### 🔴 2. Alto acoplamiento
-
-La lógica de todos los comportamientos está concentrada en una única clase.
+* 🔴 Violación del Open/Closed Principle (OCP)
+* 🔴 Alto acoplamiento
+* 🔴 Difícil mantenimiento
+* 🔴 Difícil testeo
+* 🔴 Escalabilidad limitada
 
 ---
 
-### 🔴 3. Baja mantenibilidad
+## 💡 Solución (Strategy Pattern)
 
-El crecimiento de condicionales genera código difícil de leer y mantener.
+El patrón propone:
 
----
+* Definir una **interfaz común**
+* Encapsular cada comportamiento en una clase
+* Permitir intercambiar comportamientos dinámicamente
 
-### 🔴 4. Difícil testeo
-
-No se pueden testear los comportamientos de forma aislada.
-
----
-
-### 🔴 5. Escalabilidad limitada
-
-Agregar nuevas variantes implica riesgo de romper código existente.
-
----
-
-## 💡 Idea del patrón
-
-El Strategy Pattern propone:
-
-* Definir una **interfaz común** para un conjunto de algoritmos
-* Implementar cada algoritmo en una clase separada
-* Permitir que el cliente elija cuál usar en tiempo de ejecución
+En lugar de condicionales, el comportamiento se delega a una estrategia.
 
 ---
 
@@ -95,12 +81,44 @@ StrategyPattern.Console/
 
 ---
 
+## ⚙️ Componentes del patrón
+
+### 📌 Strategy (IPaymentStrategy)
+
+Define el contrato común para todos los algoritmos.
+
+---
+
+### 📌 Concrete Strategies
+
+Implementaciones específicas:
+
+* CreditCardPaymentStrategy
+* PayPalPaymentStrategy
+* CryptoPaymentStrategy
+
+---
+
+### 📌 Context (PaymentContext)
+
+Encapsula el uso de la estrategia y delega la ejecución.
+
+---
+
+### 📌 Selector (Helper)
+
+Selecciona la estrategia en base a input del usuario.
+
+> Nota: no es un Factory formal, se mantiene simple a propósito.
+
+---
+
 ## 🔄 Flujo de ejecución
 
 1. El usuario selecciona un método de pago
-2. El sistema determina qué estrategia usar
-3. Se instancia la estrategia correspondiente
-4. El contexto ejecuta el comportamiento
+2. El sistema obtiene la estrategia correspondiente
+3. Se crea el contexto con esa estrategia
+4. El contexto ejecuta el pago
 
 ---
 
@@ -112,64 +130,15 @@ dotnet run
 
 El programa:
 
-1. Ejecuta el **BadExample**
-2. Ejecuta el **GoodExample**
-3. Permite seleccionar dinámicamente el método de pago
-
----
-
-## ⚙️ Componentes del patrón
-
-### 📌 Strategy (Interfaz)
-
-```csharp
-public interface IPaymentStrategy
-{
-    void ProcessPayment(decimal amount);
-}
-```
-
-Define el contrato común para todos los algoritmos.
-
----
-
-### 📌 Concrete Strategies
-
-Cada implementación representa una variante del algoritmo:
-
-* `CreditCardPaymentStrategy`
-* `PayPalPaymentStrategy`
-* `CryptoPaymentStrategy`
-
----
-
-### 📌 Context
-
-```csharp
-public class PaymentContext
-```
-
-* Recibe una estrategia
-* Delega la ejecución en ella
-* No conoce detalles concretos
-
----
-
-### 📌 Selector (adaptación simple)
-
-```csharp
-PaymentStrategySelector
-```
-
-Permite seleccionar la estrategia en base a input del usuario.
-
-👉 **Nota:** esto no es un Factory formal, sino una solución simple para mantener el ejemplo enfocado.
+* Ejecuta el BadExample
+* Ejecuta el GoodExample
+* Permite seleccionar dinámicamente el método de pago
 
 ---
 
 ## 🧠 Beneficios
 
-✔ Eliminación de estructuras condicionales complejas
+✔ Eliminación de condicionales complejos
 ✔ Bajo acoplamiento
 ✔ Alta cohesión
 ✔ Fácil extensión
@@ -180,26 +149,22 @@ Permite seleccionar la estrategia en base a input del usuario.
 
 ## ⚠️ Trade-offs
 
-Como todo patrón, Strategy tiene costos:
-
 * Aumenta la cantidad de clases
-* Puede ser innecesario para casos simples
+* Puede ser innecesario en casos simples
 * Introduce una capa de abstracción adicional
 
 ---
 
 ## 🚫 Cuándo NO usarlo
 
-* Cuando hay una única implementación
+* Cuando existe una única implementación
 * Cuando las variantes son muy simples
-* Cuando no se espera crecimiento del sistema
+* Cuando no se espera crecimiento
 * Cuando agrega complejidad innecesaria (violando KISS)
 
 ---
 
-## 🔗 Relación con principios de diseño
-
-Este patrón está fuertemente alineado con:
+## 🔗 Relación con principios
 
 * **Open/Closed Principle (OCP)** → extensible sin modificar
 * **Single Responsibility Principle (SRP)** → cada estrategia tiene una responsabilidad
@@ -209,39 +174,35 @@ Este patrón está fuertemente alineado con:
 
 ## 🧪 Comparación: Antes vs Después
 
-| Aspecto        | Bad Example | Strategy |
-| -------------- | ----------- | -------- |
-| Extensibilidad | ❌ Baja      | ✅ Alta   |
-| Acoplamiento   | ❌ Alto      | ✅ Bajo   |
-| Testeo         | ❌ Difícil   | ✅ Fácil  |
-| Mantenimiento  | ❌ Complejo  | ✅ Simple |
+| Aspecto        | Sin patrón | Con Strategy |
+| -------------- | ---------- | ------------ |
+| Extensibilidad | ❌ Baja     | ✅ Alta       |
+| Acoplamiento   | ❌ Alto     | ✅ Bajo       |
+| Testeo         | ❌ Difícil  | ✅ Fácil      |
+| Mantenimiento  | ❌ Complejo | ✅ Simple     |
 
 ---
 
-## 🧠 Insight importante
+## 🧠 Insight clave
 
-El Strategy Pattern no es solo una forma de eliminar `if/else`.
+El Strategy Pattern no solo elimina `if/else`.
 
-Es una forma de:
-
-👉 **modelar comportamientos que pueden variar independientemente del contexto**
+Permite modelar comportamientos que pueden variar independientemente del contexto, favoreciendo un diseño flexible y extensible.
 
 ---
 
 ## 🚀 Posibles mejoras
 
-Este ejemplo puede evolucionar hacia:
-
-* Uso de enums en lugar de strings
-* Integración con Dependency Injection
-* Aplicación de Factory Pattern
-* Testing unitario de estrategias
-* Integración en APIs reales (.NET)
+* Reemplazar strings por enums
+* Integrar Dependency Injection
+* Aplicar Factory Pattern para selección
+* Agregar tests unitarios
+* Integrar en una API real (.NET)
 
 ---
 
 ## 📌 Nota final
 
-El objetivo no es usar Strategy en todos los casos, sino reconocer cuándo el problema lo justifica.
+El objetivo no es usar Strategy siempre, sino reconocer cuándo el problema lo justifica.
 
-Este ejemplo muestra claramente el paso de una solución simple pero limitada hacia una solución flexible, mantenible y escalable.
+Este ejemplo muestra la transición desde una solución simple pero rígida hacia un diseño flexible y mantenible.
