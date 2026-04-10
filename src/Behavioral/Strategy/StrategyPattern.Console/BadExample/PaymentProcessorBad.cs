@@ -2,6 +2,20 @@ using System;
 namespace StrategyPattern.ConsoleProject.BadExample
 {
 
+    public void Run()
+    {
+        Console.WriteLine("""
+        Select payment method:
+        - CreditCard
+        - PayPal
+        - Crypto
+        """);
+
+        var input = Console.ReadLine();
+        Process(input, 300);
+    }
+
+
     public class PaymentProcessorBad
     {
         public void Process(string method, decimal amount)
