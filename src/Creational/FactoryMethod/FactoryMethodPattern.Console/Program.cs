@@ -1,5 +1,6 @@
-﻿using FactoryMethodPattern.Console.BadExample;
-using FactoryMethodPattern.Console.GoodExample;
+﻿using FactoryMethodPattern.ConsoleApp.BadExample;
+using FactoryMethodPattern.ConsoleApp.GoodExample;
+using FactoryMethodPattern.ConsoleApp.Products;
 
 Console.WriteLine("=== BAD EXAMPLE ===");
 

@@ -1,4 +1,4 @@
-namespace FactoryMethodPattern.Console.Products;
+namespace FactoryMethodPattern.ConsoleApp.Products;
 
 public class CreditCardPayment : IPayment
 {

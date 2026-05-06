@@ -1,6 +1,6 @@
-using FactoryMethodPattern.Console.Creators;
+using FactoryMethodPattern.ConsoleApp.Creators;
 
-namespace FactoryMethodPattern.Console.GoodExample;
+namespace FactoryMethodPattern.ConsoleApp.GoodExample;
 
 public class PaymentProcessorGood
 {
@@ -8,8 +8,8 @@ public class PaymentProcessorGood
     {
         PaymentCreator creator;
 
-        Console.WriteLine("Select payment method (CreditCard, PayPal):");
-        var input = Console.ReadLine();
+        System.Console.WriteLine("Select payment method (CreditCard, PayPal):");
+        var input = System.Console.ReadLine();
 
         if (input?.ToLower() == "creditcard")
         {
@@ -21,7 +21,7 @@ public class PaymentProcessorGood
         }
         else
         {
-            Console.WriteLine("Invalid payment method");
+            System.Console.WriteLine("Invalid payment method");
             return;
         }
 

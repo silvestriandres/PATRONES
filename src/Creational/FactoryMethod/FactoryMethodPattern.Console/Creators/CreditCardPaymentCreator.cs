@@ -1,6 +1,6 @@
-using FactoryMethodPattern.Console.Products;
+using FactoryMethodPattern.ConsoleApp.Products;
 
-namespace FactoryMethodPattern.Console.Creators;
+namespace FactoryMethodPattern.ConsoleApp.Creators;
 
 public class CreditCardPaymentCreator : PaymentCreator
 {
