@@ -5,12 +5,9 @@ using FactoryMethodPattern.ConsoleApp.Products;
 Console.WriteLine("=== BAD EXAMPLE ===");
 
 var badFactory = new PaymentFactoryBad();
-var payment = badFactory.CreatePayment("CreditCard");
 
-if (payment is CreditCardPayment cc)
-{
-    cc.Process();
-}
+var payment = badFactory.CreatePayment("CreditCard");
+payment.Process();
 
 Console.WriteLine("\n=== GOOD EXAMPLE ===");
 
